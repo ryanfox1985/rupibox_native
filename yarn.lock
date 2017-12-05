@@ -3775,7 +3775,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.8, prop-types@^15.6.0:
+prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
@@ -3853,6 +3853,19 @@ react-devtools-core@^2.5.0:
   dependencies:
     shell-quote "^1.6.1"
     ws "^2.0.3"
+
+react-native-gesture-handler@^1.0.0-alpha.35:
+  version "1.0.0-alpha.35"
+  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.0.0-alpha.35.tgz#c16cf97151223cb8d4902d6dd597dc1612d8cb33"
+  dependencies:
+    invariant "^2.2.2"
+    prop-types "^15.5.10"
+
+react-native-tab-view@^0.0.72:
+  version "0.0.72"
+  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.72.tgz#9f481c9cd497a086a2edf14189732677e641ea1a"
+  dependencies:
+    prop-types "^15.6.0"
 
 react-native@0.50.4:
   version "0.50.4"
