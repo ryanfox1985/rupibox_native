@@ -11,7 +11,6 @@ import SettingsDetail from '../components/SettingsDetail';
 class Settings extends Component {
   changeSettings(newSettings) {
     const currentSettings = this.props.state.settings;
-    // this.setState({ settings: Object.assign(currentSettings, newSettings) });
     this.props.saveSettings(Object.assign({}, currentSettings, newSettings));
   }
   render() {

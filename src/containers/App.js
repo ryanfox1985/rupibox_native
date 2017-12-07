@@ -1,47 +1,56 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { View, StatusBar, StyleSheet } from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import PinList from '../components/PinList';
 import Header from '../components/Header';
 import Settings from './Settings';
+import PinsApi from '../services/Api';
 
 const ScreenPins = () => (
-  <Settings />
+  <PinList />
 );
 
 const ScreenSettings = () => (
-  <PinList />
+  <Settings />
 );
 
 const ScreenLog = () => (
   <View style={{ backgroundColor: '#673ab7' }} />
 );
 
-export default class App extends Component {
+class App extends Component {
   state = {
-    index: 0,
+    index: 1,
     routes: [
-      { key: 'first', title: 'Pins' },
-      { key: 'second', title: 'Settings' },
+      { key: 'first', title: 'Settings' },
+      { key: 'second', title: 'Pins' },
       { key: 'third', title: 'Logs' }
     ]
   };
 
-  _handleIndexChange = index => this.setState({ index });
+  _handleIndexChange = (index) => {
+    if (index === 1) {
+      this.props.loadPins(this.props.state.settings);
+    }
+
+    this.setState({ index });
+  };
+
   _renderHeader = props => <TabBar {...props} />;
   _renderScene = SceneMap({
-    first: ScreenPins,
-    second: ScreenSettings,
+    first: ScreenSettings,
+    second: ScreenPins,
     third: ScreenLog
   });
 
+  componentWillMount() {
+    this.props.loadPins(this.props.state.settings);
+  }
+
   render() {
     return (
-      <View
-        style={{
-          flex: 1,
-        }}
-      >
+      <View style={styles.container}>
         <Header headerText={'Rupibox'} />
         <TabViewAnimated
           style={styles.container}
@@ -61,3 +70,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+// add some more props that come from the global state tree
+const mapStateToProps = (state) => {
+  return { state: state };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  loadPins: (settings) => {
+    dispatch({ type: 'SET_PINS', pins: [] });
+    PinsApi.getAllPins(dispatch, settings);
+  }
+});
+
+// upgrade our component to become Redux-aware
+export default connect(mapStateToProps, mapDispatchToProps)(App);

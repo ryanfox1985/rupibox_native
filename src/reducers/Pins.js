@@ -1,12 +1,13 @@
-// const myReducer = (state = {}, action) => {
-//   switch (action.type) {
-//     case 'WARP':
-//       return { ...state, speed: action.speed }
-//     case 'SHIELDS_UP':
-//       return { ...state, shields: true }
-//     default:
-//       return state
-//   }
-// };
-//
-// export default myReducer;
+const pinsReducer = (state = [], action) => {
+  console.log('pinsReducer:');
+  console.log(action);
+
+  switch (action.type) {
+    case 'SET_PINS':
+      return action.pins;
+    default:
+      return state;
+  }
+};
+
+export default pinsReducer;
