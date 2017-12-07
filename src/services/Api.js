@@ -12,11 +12,17 @@ class PinsApi {
     const { server, port, demo } = settings;
 
     if (demo) {
-      dispatch({ type: 'SET_PINS', pins: pinDemoList })
+      dispatch({ type: 'SET_PINS', pins: pinDemoList });
     } else {
+      dispatch({ type: 'ADD_LOG', log: `GET: http://${server}:${port}/pins.json` });
+
       axios
         .get(`http://${server}:${port}/pins.json`)
-        .then(response => dispatch({ type: 'SET_PINS', pins: response.data }));
+        .then(response => dispatch({ type: 'SET_PINS', pins: response.data }))
+        .catch(error => {
+          console.log(error.response);
+          dispatch({ type: 'ADD_LOG', log: error.response });
+        });
     }
   }
 }

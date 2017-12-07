@@ -6,7 +6,7 @@ import {
   TextInput,
   CheckBox
 } from 'react-native';
-import SettingsDetail from '../components/SettingsDetail';
+import RowDetail from '../components/RowDetail';
 
 class Settings extends Component {
   changeSettings(newSettings) {
@@ -18,27 +18,27 @@ class Settings extends Component {
 
     return (
       <View style={{ marginTop: 10, marginBottom: 10 }}>
-        <SettingsDetail>
+        <RowDetail>
           <Text>Server:</Text>
           <TextInput
             onChangeText={(value) => this.changeSettings({ server: value })}
             value={server}
           />
-        </SettingsDetail>
-        <SettingsDetail>
+        </RowDetail>
+        <RowDetail>
           <Text>Port:</Text>
           <TextInput
             onChangeText={(value) => this.changeSettings({ port: value })}
             value={port}
           />
-        </SettingsDetail>
-        <SettingsDetail>
+        </RowDetail>
+        <RowDetail>
           <Text>Demo:</Text>
           <CheckBox
             onChange={() => this.changeSettings({ demo: !demo })}
             value={demo}
           />
-        </SettingsDetail>
+        </RowDetail>
       </View>
     );
   }
@@ -50,7 +50,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  saveSettings: (settings) => { dispatch({ type: 'SET_SETTINGS', settings: settings }); }
+  saveSettings: (settings) => {
+    dispatch({ type: 'ADD_LOG', log: `SET_SETTINGS: ${JSON.stringify(settings)}` });
+    dispatch({ type: 'SET_SETTINGS', settings: settings });
+  }
 });
 
 // upgrade our component to become Redux-aware

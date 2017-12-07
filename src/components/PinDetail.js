@@ -16,6 +16,7 @@ export default class PinDetail extends Component {
     console.log(`http://10.10.10.19:3000/pins/${pin.id}.json`);
     console.log(`value: ${value}`);
 
+    // dispatch({ type: 'ADD_LOG', log: `GET: http://${server}:${port}/pins.json` });
     axios
       .put(`http://10.10.10.19:3000/pins/${pin.id}.json`, { value: value })
       .then(() => this.setState({ pin: Object.assign({}, pin, { value: value }) }));

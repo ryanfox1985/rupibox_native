@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, StatusBar, StyleSheet } from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
-import PinList from '../components/PinList';
 import Header from '../components/Header';
+import PinList from './PinList';
 import Settings from './Settings';
+import Logs from './Logs';
 import PinsApi from '../services/Api';
 
 const ScreenPins = () => (
@@ -16,7 +17,7 @@ const ScreenSettings = () => (
 );
 
 const ScreenLog = () => (
-  <View style={{ backgroundColor: '#673ab7' }} />
+  <Logs />
 );
 
 class App extends Component {

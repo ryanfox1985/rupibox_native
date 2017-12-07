@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-const SettingsDetail = (props) => (
+const RowDetail = (props) => (
   <View style={styles.viewStyle}>
     {props.children}
   </View>
@@ -15,4 +15,4 @@ const styles = {
   }
 };
 
-export default SettingsDetail;
+export default RowDetail;

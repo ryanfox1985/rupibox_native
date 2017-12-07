@@ -4,10 +4,10 @@ import {
   View,
   Text
 } from 'react-native';
-import PinDetail from './PinDetail';
+import PinDetail from '../components/PinDetail';
 
 class PinList extends Component {
-  renderPins() {  
+  renderPins() {
     return this.props.state.pins.map(pin =>
       <PinDetail key={pin.id} pin={pin} />
     );
