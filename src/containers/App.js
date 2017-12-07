@@ -24,7 +24,7 @@ export default class App extends Component {
       { key: 'first', title: 'Pins' },
       { key: 'second', title: 'Settings' },
       { key: 'third', title: 'Logs' }
-    ]    
+    ]
   };
 
   _handleIndexChange = index => this.setState({ index });

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   View,
   Text
@@ -6,12 +7,22 @@ import {
 import axios from 'axios';
 import PinDetail from './PinDetail';
 
-export default class PinList extends Component {
-  state = { pins: [] };
+const pinDemoList = [
+  { id: '1', name: 'test1', pin_pi: '10', value: true },
+  { id: '2', name: 'test2', pin_pi: '11', value: false },
+  { id: '3', name: 'test3', pin_pi: '12', value: false },
+  { id: '4', name: 'test4', pin_pi: '13', value: true }
+];
+
+class PinList extends Component {
+  state = { pins: this.props.state.settings.demo ? pinDemoList : [] };
 
   componentWillMount() {
+    if (this.props.state.settings.demo) {
+      return;
+    }
     axios
-      .get('http://10.10.10.19:3000/pins.json')
+      .get(`http://${this.props.state.settings.server}:${this.props.state.settings.port}/pins.json`)
       .then(response => this.setState({ pins: response.data }));
   }
 
@@ -44,7 +55,7 @@ export default class PinList extends Component {
 }
 
 const styles = {
-  pinList: {    
+  pinList: {
     paddingRight: 10,
     paddingLeft: 10,
     marginTop: 5
@@ -55,3 +66,11 @@ const styles = {
     fontWeight: 'bold'
   }
 };
+
+// add some more props that come from the global state tree
+const mapStateToProps = (state) => {
+  return { state: state };
+};
+
+// upgrade our component to become Redux-aware
+export default connect(mapStateToProps)(PinList);
